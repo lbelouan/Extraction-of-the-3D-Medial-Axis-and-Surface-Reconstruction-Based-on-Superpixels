@@ -67,19 +67,19 @@ By gathering all these outer faces, we obtain a triangular **surface mesh** repr
 1. Set up data: Ensure the images/ folder (with input images) and the .mat files (mask.mat, dino_Ps.mat, etc.) are in the MATLAB path or current working directory. The sample dataset includes 36 images (viff.001.ppm, viff.002.ppm, ...) and their corresponding calibration matrices.
 
 2. Run 2D segmentation: Open and run main_Partie_1_2_3.m. This will execute the first three parts of the pipeline:
-  -It loads the input images, converts them to Lab, and initializes superpixel centers.
-  -Runs the superpixel segmentation and merges small regions.
-  -Applies color and compactness filtering to generate binary masks for each image.
-  -Extracts the 2D medial axis points for each silhouette (via Delaunay triangulation on contours).
-  -(The script may display intermediate results such as the segmented image and skeleton overlay for each view.)
-  -On completion, it will save or make available the binary masks and Delaunay center points (medial axis) for use in the next stage.
+      - It loads the input images, converts them to Lab, and initializes superpixel centers.
+      - Runs the superpixel segmentation and merges small regions.
+      - Applies color and compactness filtering to generate binary masks for each image.
+      - Extracts the 2D medial axis points for each silhouette (via Delaunay triangulation on contours).
+      - (The script may display intermediate results such as the segmented image and skeleton overlay for each view.)
+      - On completion, it will save or make available the binary masks and Delaunay center points (medial axis) for use in the next stage.
 
 3. Run 3D reconstruction: Next, run main_Partie_4.m. This script performs the 3D modeling part of the pipeline:
-  -It loads the camera projection matrices and either uses provided 3D points (donnees.mat) or computes an initial 3D point set from the 2D data.
-  -Performs Delaunay tetrahedralization on the point set to create a volumetric mesh.
-  -Carries out the barycenter projection filtering: tetrahedra not consistent with all silhouettes are removed.
-  -Extracts the outer surface triangles from the remaining tetrahedra and displays the resulting 3D surface mesh.
-  -(The final 3D mesh can be visualized in the MATLAB figure window. The script may also save the mesh or relevant output images to the Simulation/ folder for reference.)
+    - It loads the camera projection matrices and either uses provided 3D points (donnees.mat) or computes an initial 3D point set from the 2D data.
+    - Performs Delaunay tetrahedralization on the point set to create a volumetric mesh.
+    - Carries out the barycenter projection filtering: tetrahedra not consistent with all silhouettes are removed.
+    - Extracts the outer surface triangles from the remaining tetrahedra and displays the resulting 3D surface mesh.
+    - (The final 3D mesh can be visualized in the MATLAB figure window. The script may also save the mesh or relevant output images to the Simulation/ folder for reference.)
 
 After running these scripts in order, you should see output figures illustrating the segmentation results and the final reconstructed 3D surface. You can adjust parameters (number of superpixels, color thresholds, etc.) in the scripts for different datasets or to refine results.
 
